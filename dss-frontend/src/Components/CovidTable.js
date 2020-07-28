@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 
 import {
   EuiSpacer,
@@ -8,25 +8,11 @@ import {
 import Empty from './Common/Empty'
 import Loader from './Common/Loader'
 
-const RabiesTable = () => {
-  const [data, setData] = useState([])
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    fetch(`/api/data/covid`)
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        } else {
-          throw new Error('Error')
-        }
-      })
-      .then(json => setData(json))
-      .catch(err => setError(err))
-    setLoading(false)
-  }, [])
+const RabiesTable = ({
+  data,
+  error,
+  loading
+}) => {
 
   const columns = [
     {
@@ -40,8 +26,8 @@ const RabiesTable = () => {
       sortable: true,
     },
     {
-      field: 'conf_cases',
-      name: 'Confirmed Cases',
+      field: 'tot_cases',
+      name: 'Total Cases',
       sortable: true,
     },
     {
@@ -50,9 +36,14 @@ const RabiesTable = () => {
       sortable: true,
     },
     {
-      field: 'conf_death',
-      name: 'Confirmed Deaths',
+      field: 'tot_death',
+      name: 'Total Deaths',
       sortable: true,
+    },
+    {
+      field: 'new_death',
+      name: 'New Deaths',
+      sortable: true
     }
   ];
 

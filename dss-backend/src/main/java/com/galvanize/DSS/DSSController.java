@@ -38,7 +38,6 @@ public class DSSController {
         return this.covidRepository.findAll();
     }
 
-
     // Routes to refresh data
     private final DataLoader dataLoader = new DataLoader();
 
@@ -134,34 +133,15 @@ public class DSSController {
     public String covid() {
         this.covidRepository.deleteAll();
 
-        String[] covidData = this.dataLoader.getCovid().split("\n");
+        Covid[] covidData = this.dataLoader.getCovid(); //.split("\n");
         int counter = 0;
-
-        for (int i = 1; i < covidData.length; i++) {
-            try {
-                String[] covidDataPoint = covidData[i].replaceAll("\"","").split(",");
-                Covid dataPoint = new Covid();
-                dataPoint.setSubmission_date(covidDataPoint[0]);
-                dataPoint.setState(covidDataPoint[1]);
-                dataPoint.setTot_cases(covidDataPoint[2]);
-                dataPoint.setConf_cases(covidDataPoint[3]);
-                dataPoint.setProb_cases(covidDataPoint[4]);
-                dataPoint.setNew_case(covidDataPoint[5]);
-                dataPoint.setPnew_case(covidDataPoint[6]);
-                dataPoint.setTot_death(covidDataPoint[7]);
-                dataPoint.setConf_death(covidDataPoint[8]);
-                dataPoint.setProb_death(covidDataPoint[9]);
-                dataPoint.setNew_death(covidDataPoint[10]);
-                dataPoint.setPnew_death(covidDataPoint[11]);
-                dataPoint.setCreated_at(covidDataPoint[12]);
-                dataPoint.setConsent_cases(covidDataPoint[13]);
-                dataPoint.setConsent_deaths(covidDataPoint[14]);
-                
-                this.covidRepository.save(dataPoint);
-                counter++;
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+        for (Covid covid : covidData) {
+          try {
+            this.covidRepository.save(covid);
+            counter++;
+          } catch (Exception e) {
+            System.out.println(e);
+          }
         }
         return "Processed " + counter + " records";
     }

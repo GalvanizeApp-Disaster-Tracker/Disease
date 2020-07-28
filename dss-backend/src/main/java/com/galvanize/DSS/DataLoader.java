@@ -24,10 +24,10 @@ public class DataLoader {
         );
     }
 
-    public String getCovid() {
+    public Covid[] getCovid() {
         return this.restTemplate.getForObject(
-                "https://data.cdc.gov/resource/9mfq-cb36.csv",
-                String.class
+                "https://data.cdc.gov/resource/9mfq-cb36.json?submission_date=2020-07-25T00:00:00.000",
+                Covid[].class
         );
     }
 }

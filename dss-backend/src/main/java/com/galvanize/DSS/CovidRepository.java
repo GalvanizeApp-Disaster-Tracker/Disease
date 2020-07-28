@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CovidRepository extends CrudRepository<Covid, Long> {
 
-    @Query(value = "SELECT * FROM Covid WHERE submission_date = ?1", nativeQuery = true)
-    <Optional>Covid findBySubDate(String submission_date);
+  @Query(value = "select * from covid where submission_date = ?1", nativeQuery = true)
+  <Optional> Covid findBySubDate(String submission_date);
 }

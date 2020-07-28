@@ -7,6 +7,8 @@ import {
   EuiIcon
 } from '@elastic/eui';
 
+import About from './About'
+
 const Header = () => {
   return (
     <Fragment>
@@ -18,7 +20,7 @@ const Header = () => {
         </EuiHeaderSection>
         <EuiHeaderSection side="right">
           <EuiHeaderSectionItem border="none">
-            About
+            <About />
           </EuiHeaderSectionItem>
         </EuiHeaderSection>
       </EuiHeader>
