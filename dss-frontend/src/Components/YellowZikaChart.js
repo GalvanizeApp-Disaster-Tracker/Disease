@@ -34,8 +34,8 @@ const YellowZikaChart = ({
             splitSeriesAccessors={['g']}
             stackAccessors={['g']}
             />
-          <Axis id="bottom-axis" position="bottom" showGridLines />
-          <Axis id="left-axis" position="left" showGridLines />
+          <Axis id="bottom-axis" position="bottom" showGridLines title="MMWR Week" />
+          <Axis id="left-axis" position="left" showGridLines title="Number of Cases" />
         </Chart>
       </Fragment>
     )

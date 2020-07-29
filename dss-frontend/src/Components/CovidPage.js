@@ -5,7 +5,6 @@ import {
   EuiPageHeader,
   EuiPageHeaderSection,
   EuiTitle,
-  EuiPageContent,
   EuiPanel,
   EuiFlexGroup,
   EuiFlexItem,
@@ -57,28 +56,26 @@ const CovidPage = () => {
               <h2>Current as of: {new Date(Date.now() - (86400 * 1000)).toLocaleString()}</h2>
             </EuiPageHeaderSection>
           </EuiPageHeader>
-          <EuiPageContent>
-            <EuiPanel paddingSize="m" hasShadow>
-              CDC reports aggregate counts of COVID-19 cases and death numbers daily online. Data on the COVID-19 website and CDC’s COVID Data Tracker are based on these most recent numbers reported by states, territories, and other jurisdictions. This data set of “United States COVID-19 Cases and Deaths by State over Time” combines this information. However, data are dependent on jurisdictions’ timely and accurate reporting.
+          <EuiPanel paddingSize="m" hasShadow>
+            CDC reports aggregate counts of COVID-19 cases and death numbers daily online. Data on the COVID-19 website and CDC’s COVID Data Tracker are based on these most recent numbers reported by states, territories, and other jurisdictions. This data set of “United States COVID-19 Cases and Deaths by State over Time” combines this information. However, data are dependent on jurisdictions’ timely and accurate reporting.
             </EuiPanel>
-            <EuiSpacer />
-            <EuiFlexGroup gutterSize="l">
-              <EuiFlexItem>
-                <EuiPanel betaBadgeLabel="Stats" hasShadow>
-                  <CovidTable
-                    data={data}
-                  />
-                </EuiPanel>
-              </EuiFlexItem>
-              <EuiFlexItem>
-                <EuiPanel betaBadgeLabel="Map" hasShadow>
-                  <CovidMap
-                    data={data}
-                  />
-                </EuiPanel>
-              </EuiFlexItem>
-            </EuiFlexGroup>
-          </EuiPageContent>
+          <EuiSpacer />
+          <EuiFlexGroup gutterSize="l">
+            <EuiFlexItem>
+              <EuiPanel betaBadgeLabel="Stats" hasShadow>
+                <CovidTable
+                  data={data}
+                />
+              </EuiPanel>
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiPanel betaBadgeLabel="Map" hasShadow>
+                <CovidMap
+                  data={data}
+                />
+              </EuiPanel>
+            </EuiFlexItem>
+          </EuiFlexGroup>
         </EuiPageBody>
       </Fragment>
     )

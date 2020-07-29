@@ -5,7 +5,6 @@ import {
   EuiPageHeader,
   EuiPageHeaderSection,
   EuiTitle,
-  EuiPageContent,
   EuiPanel,
   EuiFlexGroup,
   EuiFlexItem,
@@ -55,28 +54,26 @@ const RabiesPage = () => {
             <EuiPageHeaderSection>
             </EuiPageHeaderSection>
           </EuiPageHeader>
-          <EuiPageContent>
-            <EuiPanel paddingSize="m" hasShadow>
+          <EuiPanel paddingSize="m" hasShadow>
             Zika virus is a member of the virus family Flaviviridae. It is spread by daytime-active Aedes mosquitoes, such as A. aegypti and A. albopictus. Its name comes from the Ziika Forest of Uganda, where the virus was first isolated in 1947. Zika virus is related to the dengue, yellow fever, Japanese encephalitis, and West Nile viruses. Since the 1950s, it has been known to occur within a narrow equatorial belt from Africa to Asia. From 2007 to 2016, the virus spread eastward, across the Pacific Ocean to the Americas, leading to the 2015–2016 Zika virus epidemic.
             </EuiPanel>
-            <EuiSpacer />
-            <EuiFlexGroup gutterSize="l">
-              <EuiFlexItem>
-                <EuiPanel betaBadgeLabel="Stats" hasShadow>
-                  <YellowZikaTable
-                    data={data}
-                  />
-                </EuiPanel>
-              </EuiFlexItem>
-              <EuiFlexItem>
-                <EuiPanel betaBadgeLabel="Cases" hasShadow>
-                  <YellowZikaChart
-                    data={data}
-                  />
-                </EuiPanel>
-              </EuiFlexItem>
-            </EuiFlexGroup>
-          </EuiPageContent>
+          <EuiSpacer />
+          <EuiFlexGroup gutterSize="l">
+            <EuiFlexItem>
+              <EuiPanel betaBadgeLabel="Stats" hasShadow>
+                <YellowZikaTable
+                  data={data}
+                />
+              </EuiPanel>
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiPanel betaBadgeLabel="Cases" hasShadow>
+                <YellowZikaChart
+                  data={data}
+                />
+              </EuiPanel>
+            </EuiFlexItem>
+          </EuiFlexGroup>
         </EuiPageBody>
       </Fragment>
     )
