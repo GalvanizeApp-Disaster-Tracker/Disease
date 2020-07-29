@@ -5,13 +5,8 @@ import {
   EuiInMemoryTable
 } from '@elastic/eui'
 
-import Empty from './Common/Empty'
-import Loader from './Common/Loader'
-
 const RabiesTable = ({
   data,
-  error,
-  loading
 }) => {
 
   const columns = [
@@ -47,23 +42,17 @@ const RabiesTable = ({
     }
   ];
 
-  if (loading) {
-    return <Loader />
-  } else if (error) {
-    return <Empty error={error} />
-  } else if (data !== []) {
-    return (
-      <Fragment>
-        <EuiSpacer size="l" />
-        <EuiInMemoryTable
-          items={data}
-          columns={columns}
-          pagination={true}
-          sorting={true}
-        />
-      </Fragment>
-    )
-  }
+  return (
+    <Fragment>
+      <EuiSpacer size="l" />
+      <EuiInMemoryTable
+        items={data}
+        columns={columns}
+        pagination={true}
+        sorting={true}
+      />
+    </Fragment>
+  )
 }
 
 export default RabiesTable

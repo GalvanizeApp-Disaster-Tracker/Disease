@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import {
+  EuiSwitch
+} from '@elastic/eui'
+
 import { scaleQuantize } from "d3-scale";
 
 import {
@@ -9,10 +13,6 @@ import {
 } from "react-simple-maps";
 
 import ReactTooltip from "react-tooltip";
-
-import Empty from './Common/Empty'
-import Loader from './Common/Loader'
-
 
 const allStates = [
   { "id": "AL", "val": "01" },
@@ -95,23 +95,58 @@ const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 const CovidMap = ({
   data,
-  error,
-  loading
 }) => {
   const [toolTip, setToolTip] = useState("")
+  const [deaths, setDeaths] = useState(false)
 
-  if (loading) {
-    return <Loader />
-  } else if (error) {
-    return <Empty error={error} />
-  } else if (data !== []) {
-    return (
-      <div>
-        <ComposableMap data-tip="" projection="geoAlbersUsa">
-          <Geographies geography={geoUrl}>
-            {({ geographies }) => (
-              <>
-                {geographies.map(geo => {
+  return (
+    <div>
+      <EuiSwitch
+        label="Show Deaths"
+        checked={deaths}
+        onChange={() => { setDeaths(!deaths) }}
+      />
+      <ComposableMap data-tip="" projection="geoAlbersUsa">
+        <Geographies geography={geoUrl}>
+          {({ geographies }) => (
+            <>
+              {geographies.map(geo => {
+                if (deaths) {
+                  const curMax = Math.max.apply(Math, data.map(function (o) { return o.tot_death; }))
+                  const curMin = Math.min.apply(Math, data.map(function (o) { return o.tot_death; }))
+                  const curRange = (curMax - curMin)
+                  const newRange = (10 - 1)
+                  const cur = allStates.find(s => s.val === geo.id)
+                  const cases = data.find(s => cur.id === s.state)
+                  const newValue = cases ? (((cases.tot_death - curMin) * newRange) / curRange) + 1 : 0
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      onMouseEnter={() => {
+                        const { state, tot_death } = cases;
+                        setToolTip(`${state} — ${tot_death}`);
+                      }}
+                      onMouseLeave={() => {
+                        setToolTip("");
+                      }}
+                      style={{
+                        default: {
+                          fill: colorScale(newValue),
+                          outline: "none"
+                        },
+                        hover: {
+                          fill: "#F53",
+                          outline: "none"
+                        },
+                        pressed: {
+                          fill: "#E42",
+                          outline: "none"
+                        }
+                      }}
+                    />
+                  )
+                } else {
                   const curMax = Math.max.apply(Math, data.map(function (o) { return o.tot_cases; }))
                   const curMin = Math.min.apply(Math, data.map(function (o) { return o.tot_cases; }))
                   const curRange = (curMax - curMin)
@@ -146,15 +181,15 @@ const CovidMap = ({
                       }}
                     />
                   )
-                })}
-              </>
-            )}
-          </Geographies>
-        </ComposableMap>
-        <ReactTooltip>{toolTip}</ReactTooltip>
-      </div>
-    );
-  }
+                }
+              })}
+            </>
+          )}
+        </Geographies>
+      </ComposableMap>
+      <ReactTooltip>{toolTip}</ReactTooltip>
+    </div>
+  );
 };
 
 export default CovidMap;

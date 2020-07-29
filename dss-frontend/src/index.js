@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import '@elastic/eui/dist/eui_theme_dark.css'
+import '@elastic/charts/dist/theme_only_dark.css';
 
 ReactDOM.render(
   <React.StrictMode>
