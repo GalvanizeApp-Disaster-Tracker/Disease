@@ -17,7 +17,7 @@ import CovidPage from './Components/CovidPage'
 function App() {
   return (
     <Fragment>
-      <Header />
+      {/* <Header /> */}
       <EuiPage>
         <EuiPageBody component="div">
           <EuiPageContent>
